@@ -1,0 +1,274 @@
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="vertical">
+
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     과목  이름              "
+        android:textSize="15dp" />
+    
+    <EditText
+        android:id="@+id/subName"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+         />
+
+   </LinearLayout>
+   
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="      교수님 성함           "
+        android:textSize="15dp" />
+    
+    <EditText
+        android:id="@+id/proName"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+         />
+
+   </LinearLayout>
+   
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     과목 색상                         " 
+        android:textSize="15dp"/>
+    
+    <Button
+        android:id="@+id/mainColor"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ffff0000"
+         />
+
+   </LinearLayout>
+    
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:orientation="horizontal"
+    android:gravity="center">
+    <Button
+         android:id="@+id/color1"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ffff0000"
+         />
+    <Button
+        android:id="@+id/color2"
+       android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ff00ff00"
+         />
+    <Button
+        android:id="@+id/color3"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ff0000ff"
+         />
+    <Button
+         android:id="@+id/color4"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ffffff00"
+         />
+    <Button
+        android:id="@+id/color5"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ffff00ff"
+         />
+    <Button
+        android:id="@+id/color6"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="#ff00ffff"
+         />
+        
+    </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:background="#77770067">
+     
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     요일"
+        android:textSize="15dp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp">
+        <Button
+            android:id="@+id/day1"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="월"
+            android:background="#ffff0000"/>
+        <Button
+            android:id="@+id/day2"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="화"
+            android:background="#ff00ff00"/>
+        <Button
+            android:id="@+id/day3"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="수"
+            android:background="#ff00ff00"/>
+        <Button
+            android:id="@+id/day4"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="목"
+            android:background="#ff00ff00"/>
+        <Button
+            android:id="@+id/day5"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="금"
+            android:background="#ff00ff00"/>
+        <Button
+            android:id="@+id/day6"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="토"
+            android:background="#ff00ff00"/>
+        <Button
+            android:id="@+id/day7"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="일"
+            android:background="#ff00ff00"/>
+        
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     강의실                   "/>
+        <EditText
+            android:id="@+id/classNum"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+         />
+     </LinearLayout>
+     
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     시간                  "/>
+        <TextView
+            android:id="@+id/time1"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="9:30"
+        android:textSize="20dp"
+         />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     ~          "/>
+        <TextView
+            android:id="@+id/time2"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+         android:textSize="20dp"
+        android:text="10:30"
+        
+         />
+     </LinearLayout>
+     </LinearLayout>
+     
+     <ListView
+        android:id="@+id/plus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+     
+     <Button
+        android:id="@+id/plusBtn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"/>
+     
+     <LinearLayout 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:orientation="horizontal">
+         <Button
+             android:id="@+id/saveBtn" 
+              android:visibility="gone"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="저장"/>
+         <Button
+             android:id="@+id/changeBtn"
+              android:visibility="gone"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="수정"/>
+         <Button
+             android:id="@+id/deleteBtn"
+              android:visibility="gone"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="삭제"/>
+        <Button 
+             android:id="@+id/closeBtn" 
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="닫기"/>
+     </LinearLayout>
+     </LinearLayout>   
+</ScrollView>
