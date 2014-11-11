@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="20" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:name="com.hanproject.timetable.MainActivity_LP"></activity>
-          <activity android:name="com.hanproject.timetable.TimeTableActivity"></activity>
+        <activity android:name="com.hanproject.timetable.MainActivity_LP" >
+        </activity>
+        <activity android:name="com.hanproject.timetable.TimeTableActivity" >
+        </activity>
+        <activity android:name="com.hanproject.timetable.CalendarMonthViewActivity" >
+        </activity>
+        <activity android:name="com.hanproject.timetable.ListViewActivity" >
+        </activity>
+        <activity android:name="com.hanproject.timetable.SelectChangeActivity" >
+        </activity>
     </application>
 
 </manifest>

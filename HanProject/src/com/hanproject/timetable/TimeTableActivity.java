@@ -2,15 +2,17 @@ package com.hanproject.timetable;
 
 import java.util.StringTokenizer;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,11 +23,11 @@ import android.widget.TextView;
 
 import com.hanproject.R;
 
-public class TimeTableActivity extends ActionBarActivity {
+public class TimeTableActivity extends Activity {
 
-	FragmentManager fm= getFragmentManager();
+	FragmentManager fm = getFragmentManager();
 	static SQLiteDatabase db;
-	static boolean mode=false;
+	static boolean mode = false;
 	static int screenWidth;
 	static int screenHeight;
 	static int day = 0;
@@ -33,28 +35,30 @@ public class TimeTableActivity extends ActionBarActivity {
 	GridView timeTable;
 	int viewWidth;
 	float viewHeight;
-	boolean setting=false;
+	boolean setting = false;
 	Button btn;
+	final int SCHEDULE_MENU_REQUEST = 2000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timetable);
-		
-		btn=(Button)findViewById(R.id.btn);
-		btn.setOnClickListener(new OnClickListener(){
+
+		btn = (Button) findViewById(R.id.btn);
+		btn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(btn.getText().toString().equals("보기")){
+				if (btn.getText().toString().equals("보기")) {
 					btn.setText("편집");
-					mode=true;}
-				else{
+					mode = true;
+				} else {
 					btn.setText("보기");
-					mode=false;}
+					mode = false;
+				}
 			}
-			
+
 		});
 
 		TimeTableAdapter adapter = new TimeTableAdapter(this);
@@ -65,67 +69,67 @@ public class TimeTableActivity extends ActionBarActivity {
 		screenWidth = metrics.widthPixels;
 		screenHeight = metrics.heightPixels;
 
-		
-		
-		adapter.addItem(new TableItem("",0, 0));
-		adapter.addItem(new TableItem("월", 0, 0));
-		adapter.addItem(new TableItem("화", 0, 0));
-		adapter.addItem(new TableItem("수", 0, 0));
-		adapter.addItem(new TableItem("목", 0, 0));
-		adapter.addItem(new TableItem("금", 0, 0));
-		
-		int time = 8;
-		for (int i = 0; i < 66; i++) {
-			day = i % 6;
-			if (i % 6 == 0) {
-				adapter.addItem(new TableItem((time++) + "시", 0, 0));
-			} else
-				adapter.addItem(new TableItem("", time, day));
-		}
-
-		timeTable.setAdapter(adapter);
-
-	}
-	protected void onResume() {
-		super.onResume();
-		
-		setContentView(R.layout.timetable);
-		
-		btn=(Button)findViewById(R.id.btn);
-		if(mode==true){ btn.setText("편집");}
-		else btn.setText("보기");
-		btn.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(btn.getText().toString().equals("보기")){
-					btn.setText("편집");
-					mode=true;}
-				else{
-					btn.setText("보기");
-					mode=false;}
-			}
-			
-		});
-
-		TimeTableAdapter adapter = new TimeTableAdapter(this);
-		timeTable = (GridView) findViewById(R.id.timetable);
-
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		screenWidth = metrics.widthPixels;
-		screenHeight = metrics.heightPixels;
-		
-		
-			
 		adapter.addItem(new TableItem("", 0, 0));
 		adapter.addItem(new TableItem("월", 0, 0));
 		adapter.addItem(new TableItem("화", 0, 0));
 		adapter.addItem(new TableItem("수", 0, 0));
 		adapter.addItem(new TableItem("목", 0, 0));
 		adapter.addItem(new TableItem("금", 0, 0));
-		
+
+		int time = 8;
+		for (int i = 0; i < 66; i++) {
+			day = i % 6;
+			if (i % 6 == 0) {
+				adapter.addItem(new TableItem((time++) + "시", 0, 0));
+			} else
+				adapter.addItem(new TableItem("", time, day));
+		}
+
+		timeTable.setAdapter(adapter);
+
+	}
+
+	protected void onResume() {
+		super.onResume();
+
+		setContentView(R.layout.timetable);
+
+		btn = (Button) findViewById(R.id.btn);
+		if (mode == true) {
+			btn.setText("편집");
+		} else
+			btn.setText("보기");
+		btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (btn.getText().toString().equals("보기")) {
+					btn.setText("편집");
+					mode = true;
+				} else {
+					btn.setText("보기");
+					mode = false;
+				}
+			}
+
+		});
+
+		TimeTableAdapter adapter = new TimeTableAdapter(this);
+		timeTable = (GridView) findViewById(R.id.timetable);
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		screenWidth = metrics.widthPixels;
+		screenHeight = metrics.heightPixels;
+
+		adapter.addItem(new TableItem("", 0, 0));
+		adapter.addItem(new TableItem("월", 0, 0));
+		adapter.addItem(new TableItem("화", 0, 0));
+		adapter.addItem(new TableItem("수", 0, 0));
+		adapter.addItem(new TableItem("목", 0, 0));
+		adapter.addItem(new TableItem("금", 0, 0));
+
 		int time = 8;
 		for (int i = 0; i < 66; i++) {
 			day = i % 6;
@@ -137,41 +141,44 @@ public class TimeTableActivity extends ActionBarActivity {
 		timeTable.setAdapter(adapter);
 
 	}
-	public void onWindowFocusChanged(boolean hasFocus) 
-	{
+
+	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 
-		if(setting==false){
+		if (setting == false) {
 			viewWidth = timeTable.getWidth() / 6;
 			viewHeight = timeTable.getHeight() / 12;
 			setting = true;
 		}
 		GridView timeTable = (GridView) findViewById(R.id.timetable);
 
-		btn=(Button)findViewById(R.id.btn);
-		if(mode==true) btn.setText("편집");
-		else btn.setText("보기");
-		
+		btn = (Button) findViewById(R.id.btn);
+		if (mode == true)
+			btn.setText("편집");
+		else
+			btn.setText("보기");
+
 		createDataBase("timeplus.db");
 		createTable("base");
 		queryData1("base");
 
 	}
-	String numberTwo(int s)
-	{
-		String st=String.valueOf(s);
-		if(s<10)
-		{
-			st="0"+st;
-	    }
+
+	String numberTwo(int s) {
+		String st = String.valueOf(s);
+		if (s < 10) {
+			st = "0" + st;
+		}
 		return st;
 	}
+
 	void createDataBase(String name) {
 		db = openOrCreateDatabase(name, MODE_WORLD_WRITEABLE, null);
 	}
 
 	void createTable(String name) {
-		db.execSQL("CREATE TABLE IF NOT EXISTS " + name
+		db.execSQL("CREATE TABLE IF NOT EXISTS "
+				+ name
 				+ "(subject text,professor text,classroom text,"
 				+ "starttime text,finishtime text,day integer,color integer,memo text)");
 	}
@@ -184,52 +191,58 @@ public class TimeTableActivity extends ActionBarActivity {
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
 				cursor.moveToNext();
-				int day=cursor.getInt(0);
+				int day = cursor.getInt(0);
 				String subject = cursor.getString(1);
-				String starttime=cursor.getString(2);
-				String finishtime=cursor.getString(3);
-				int color=cursor.getInt(4);
-				StringTokenizer st=new StringTokenizer(starttime,":");
-				int startHours=Integer.parseInt(st.nextToken());
-				int startMinute=Integer.parseInt(st.nextToken());
-				st=new StringTokenizer(finishtime,":");
-				int finishHours=Integer.parseInt(st.nextToken());
-				int finishMinute=Integer.parseInt(st.nextToken());
-				int duration=caldur(startHours,startMinute,finishHours,finishMinute);
-				setSubjectName(day-1, subject, startHours, startMinute, duration, color);
+				String starttime = cursor.getString(2);
+				String finishtime = cursor.getString(3);
+				int color = cursor.getInt(4);
+				StringTokenizer st = new StringTokenizer(starttime, ":");
+				int startHours = Integer.parseInt(st.nextToken());
+				int startMinute = Integer.parseInt(st.nextToken());
+				st = new StringTokenizer(finishtime, ":");
+				int finishHours = Integer.parseInt(st.nextToken());
+				int finishMinute = Integer.parseInt(st.nextToken());
+				int duration = caldur(startHours, startMinute, finishHours,
+						finishMinute);
+				setSubjectName(day - 1, subject, startHours, startMinute,
+						duration, color);
 			}
 		}
 	}
-	
-	Data_LP queryData2(String name,int startHours, int startMinute,int dayOfWeek) {
-		Data_LP data=null;
-		String startTime=startHours+":"+numberTwo(startMinute);
+
+	Data_LP queryData2(String name, int startHours, int startMinute,
+			int dayOfWeek) {
+		Data_LP data = null;
+		String startTime = startHours + ":" + numberTwo(startMinute);
 		String sql = "Select subject, professor, day ,  classroom,starttime,finishtime, color from "
-				+ name+" where starttime = '"+startTime+"' and ";
-		sql+="day = "+(dayOfWeek+1);
+				+ name + " where starttime = '" + startTime + "' and ";
+		sql += "day = " + (dayOfWeek + 1);
 
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
 				cursor.moveToNext();
 				String subject = cursor.getString(0);
-				String professor=cursor.getString(1);
-				int day=cursor.getInt(2);
-				int color=cursor.getInt(6);
-				String classroom=cursor.getString(3);
-				String starttime=cursor.getString(4);
-				String finishtime=cursor.getString(5);
-				data=new Data_LP(subject,professor,color,day,classroom,starttime,finishtime);
+				String professor = cursor.getString(1);
+				int day = cursor.getInt(2);
+				int color = cursor.getInt(6);
+				String classroom = cursor.getString(3);
+				String starttime = cursor.getString(4);
+				String finishtime = cursor.getString(5);
+				data = new Data_LP(subject, professor, color, day, classroom,
+						starttime, finishtime);
 			}
 		}
 		return data;
-		}
-	String queryData3(String name,int startHours, int startMinute,int dayOfWeek) {
-		String memo="";
-		String startTime=startHours+":"+numberTwo(startMinute);
-		String sql = "Select memo from "
-				+ name+" where starttime = '"+startTime+"' and ";
-		sql+="day = "+(dayOfWeek+1);
+	}
+
+	String queryData3(String name, int startHours, int startMinute,
+			int dayOfWeek) {
+		String memo = "";
+		String startTime = startHours + ":" + numberTwo(startMinute);
+		String sql = "Select memo from " + name + " where starttime = '"
+				+ startTime + "' and ";
+		sql += "day = " + (dayOfWeek + 1);
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -238,21 +251,24 @@ public class TimeTableActivity extends ActionBarActivity {
 			}
 		}
 		return memo;
-		}
+	}
 
 	private int caldur(int startHours, int startMinute, int finishHours,
 			int finishMinute) {
 		// TODO Auto-generated method stub
 		int duration;
-		if(finishMinute>startMinute)
-			duration=(finishMinute-startMinute)+60*(finishHours-startHours);
+		if (finishMinute > startMinute)
+			duration = (finishMinute - startMinute) + 60
+					* (finishHours - startHours);
 		else
-			duration=(60+finishMinute-startMinute)+60*(finishHours-startHours-1);
+			duration = (60 + finishMinute - startMinute) + 60
+					* (finishHours - startHours - 1);
 		return duration;
 	}
 
 	public void setSubjectName(final int dayOfWeek, String SubjectName,
-			final int startHours, final int startMinute, float durationMinute, int color) {
+			final int startHours, final int startMinute, float durationMinute,
+			int color) {
 
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
 
@@ -264,26 +280,24 @@ public class TimeTableActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Data_LP data;
-				data=queryData2("base",startHours,startMinute,dayOfWeek);
-				if(mode==true)
-				{
+				data = queryData2("base", startHours, startMinute, dayOfWeek);
+				if (mode == true) {
 					Intent intent = new Intent(getApplicationContext(),
 							MainActivity_LP.class);
 					intent.putExtra("mode", 1);
 					intent.putExtra("subject", data.subjectName);
-					intent.putExtra("professor",data.professorName);
+					intent.putExtra("professor", data.professorName);
 					intent.putExtra("color", data.color);
-					intent.putExtra("classroom",data.classNumber);
-					intent.putExtra("day",data.day);
-					intent.putExtra("starttime",data.startTime);
+					intent.putExtra("classroom", data.classNumber);
+					intent.putExtra("day", data.day);
+					intent.putExtra("starttime", data.startTime);
 					intent.putExtra("finishtime", data.finishTime);
 					startActivity(intent);
-				}
-				else
-				{
-					String memo=queryData3("base",startHours,startMinute,dayOfWeek);
-					DFragment dFragment = new DFragment(data,memo,"base");
-					dFragment.show(fm,"Dialog Fragment");
+				} else {
+					String memo = queryData3("base", startHours, startMinute,
+							dayOfWeek);
+					DFragment dFragment = new DFragment(data, memo, "base");
+					dFragment.show(fm, "Dialog Fragment");
 				}
 			}
 
@@ -340,4 +354,25 @@ public class TimeTableActivity extends ActionBarActivity {
 
 		return answer;
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.timetable_menu, menu);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.schedule:
+			intent = new Intent(getApplicationContext(),
+					com.hanproject.timetable.CalendarMonthViewActivity.class);
+			startActivityForResult(intent, SCHEDULE_MENU_REQUEST);
+			break;
+		}
+
+		return true;
+	}
+
 }
