@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+  
+
+ 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:text="휴강 설정" 
+        android:textStyle="italic"/>
+    
+	<LinearLayout 
+   	 android:layout_width="match_parent"
+   	 android:layout_height="wrap_content"
+   	 android:paddingTop="30dp"
+   	 android:orientation="horizontal" >
+  
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강의실 변경"
+        android:textSize="16dp"
+        android:textStyle="italic" />
+    <EditText
+        android:id="@+id/classroomedit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="italic" />
+    </LinearLayout>
+    
+    <LinearLayout 
+   	 android:layout_width="match_parent"
+   	 android:layout_height="wrap_content"
+   	 android:orientation="horizontal" >
+    <Button
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강의실 변경 완료"
+        android:textSize="16dp"
+        android:textStyle="italic"/>
+     <Button
+        android:id="@+id/classcancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강의실 초기화"
+        android:textSize="16dp"
+        android:textStyle="italic"/>
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/cancel"
+        android:paddingTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="닫기"
+        android:textSize="16dp"
+        android:textStyle="italic"/>
+  
+  </LinearLayout>

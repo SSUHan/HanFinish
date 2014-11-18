@@ -1,6 +1,7 @@
 package com.hanproject;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -17,13 +18,25 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_start);
 		
+		/*SQLiteDatabase db;
+		db=openOrCreateDatabase("timeplus.db",MODE_WORLD_WRITEABLE, null);
+		String sql="delete from base where subject='심리학' and day=3";
+    	db.execSQL(sql);
+		sql="delete from base where subject='컴구' and day=3";
+		db.execSQL(sql);
+		
+		SQLiteDatabase db;
+		db=openOrCreateDatabase("timeplus.db",MODE_WORLD_WRITEABLE, null);
+		String sql="drop table base_break";
+		db.execSQL(sql);*/
+		
 		goTimeTable = (Button)findViewById(R.id.goTimeTable);
 		goTimeTable.setOnClickListener(new OnClickListener()
 		{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			    Intent intent = new Intent(getApplicationContext(),com.hanproject.timetable.TimeTableActivity.class);
+			    Intent intent = new Intent(getApplicationContext(),com.hanproject.timetable.TT_TimeTableActivity.class);
 			    startActivity(intent);
 			}
 		});

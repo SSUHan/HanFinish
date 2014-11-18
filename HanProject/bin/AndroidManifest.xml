@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="20" />
 
     <application
@@ -22,16 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hanproject.timetable.MainActivity_LP" >
+        <activity android:name="com.hanproject.timetable.TT_LP_MainActivity" >
         </activity>
-        <activity android:name="com.hanproject.timetable.TimeTableActivity" >
+        <activity android:name="com.hanproject.timetable.TT_TimeTableActivity" >
         </activity>
-        <activity android:name="com.hanproject.timetable.CalendarMonthViewActivity" >
+        <activity android:name="com.hanproject.timetable.CM_CalendarMonthViewActivity" >
         </activity>
-        <activity android:name="com.hanproject.timetable.ListViewActivity" >
+        <activity android:name="com.hanproject.timetable.DI_ListViewActivity" >
         </activity>
-        <activity android:name="com.hanproject.timetable.SelectChangeActivity" >
+        <activity android:name="com.hanproject.timetable.DI_SelectChangeActivity" >
         </activity>
+        <activity android:name=".timetable.DI_CP_PlusClassFragment"></activity>
     </application>
 
 </manifest>
