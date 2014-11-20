@@ -69,10 +69,6 @@ public class CM_CalendarMonthAdapter extends BaseAdapter {
 		recalculate();
 		resetDayNumbers();
 
-//		DisplayMetrics metrics = new DisplayMetrics();
-//		act.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//		act.screenWidth = metrics.widthPixels;
-//		act.screenHeight = metrics.heightPixels;
 	}
 
 	public void recalculate() {
@@ -184,7 +180,6 @@ public class CM_CalendarMonthAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		CM_CalendarMonthViewActivity monthAct = new CM_CalendarMonthViewActivity();
 
 		Log.d(TAG, "getView(" + position + ") called.");
 

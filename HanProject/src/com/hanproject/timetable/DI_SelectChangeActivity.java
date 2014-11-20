@@ -33,11 +33,15 @@ public class DI_SelectChangeActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
-        
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.di_select_change);
 
+		try {
+			getActionBar().setTitle("변경 정보");
+			getActionBar().setDisplayShowHomeEnabled(false);
+		} catch (Exception e) {
+
+		}
 		classroomedit = (EditText) findViewById(R.id.classroomedit);
 		check = (Button) findViewById(R.id.check);
 		classcancel=(Button)findViewById(R.id.classcancel);

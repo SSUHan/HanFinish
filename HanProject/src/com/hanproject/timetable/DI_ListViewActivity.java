@@ -59,7 +59,12 @@ public class DI_ListViewActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.di_listview);
 		
-		
+		try {
+			getActionBar().setTitle("LIST");
+			getActionBar().setDisplayShowHomeEnabled(false);
+		} catch (Exception e) {
+
+		}
 		createDataBase();
 		
 

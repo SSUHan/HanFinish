@@ -9,15 +9,15 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hanproject.R;
-
 
 public class CM_CalendarMonthViewActivity extends Activity {
 
 	CM_CalendarMonthView monthView;
 	int monthInfoHeight;
-	
+
 	static CM_CalendarMonthAdapter monthViewAdapter;
 
 	TextView monthText;
@@ -25,12 +25,18 @@ public class CM_CalendarMonthViewActivity extends Activity {
 	int curYear;
 	int curMonth;
 	static int mPosition;
-	static int selectedYear,day, columnIndex, changing, selectedMonth;
+	static int selectedYear, day, columnIndex, changing, selectedMonth;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cm_activity_calendar);
 
+		try {
+			getActionBar().setTitle("CALENDAR");
+			getActionBar().setDisplayShowHomeEnabled(false);
+		} catch (Exception e) {
+
+		}
 		monthView = (CM_CalendarMonthView) findViewById(R.id.monthView);
 		monthViewAdapter = new CM_CalendarMonthAdapter(this);
 		monthView.setAdapter(monthViewAdapter);
@@ -41,16 +47,28 @@ public class CM_CalendarMonthViewActivity extends Activity {
 					int position, long id) {
 				CM_MonthItem curItem = (CM_MonthItem) monthViewAdapter
 						.getItem(position);
-				day = curItem.getDay();
-				Intent intent = new Intent(getBaseContext(),
-						DI_ListViewActivity.class);
-				mPosition = position;
-				columnIndex = position % 7;
-				selectedMonth = curMonth;
-				selectedYear=curYear;
+				if (curItem.getDay()== 0 && (position >= 0 && position <= 6)) {
+					monthViewAdapter.setPreviousMonth();
+					monthViewAdapter.notifyDataSetChanged();
 
-				startActivityForResult(intent, 1001);
-				Log.d("CalendarMonthViewActivity", "Selected : " + day);
+					setMonthText();
+				} else if (curItem.getDay() == 0 && (position >= 28 && position <= 41)) {
+					monthViewAdapter.setNextMonth();
+					monthViewAdapter.notifyDataSetChanged();
+					
+					setMonthText();
+				} else {
+					day = curItem.getDay();
+					Intent intent = new Intent(getBaseContext(),
+							DI_ListViewActivity.class);
+					mPosition = position;
+					columnIndex = position % 7;
+					selectedMonth = curMonth;
+					selectedYear = curYear;
+
+					startActivityForResult(intent, 1001);
+					Log.d("CalendarMonthViewActivity", "Selected : " + day);
+				}
 			}
 		});
 
