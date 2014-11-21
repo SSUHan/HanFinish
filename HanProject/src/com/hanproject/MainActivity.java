@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
 		String sql="drop table base_break";
 		db.execSQL(sql);*/
 		
-		goTimeTable = (Button)findViewById(R.id.goTimeTable);
+		goTimeTable = (Button)findViewById(R.id.button1);
 		goTimeTable.setOnClickListener(new OnClickListener()
 		{
 			@Override
