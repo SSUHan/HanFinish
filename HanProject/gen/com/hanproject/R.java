@@ -1650,7 +1650,7 @@ containing a value of this type.
         public static final int main=0x7f020041;
     }
     public static final class id {
-        public static final int Memo=0x7f09007f;
+        public static final int Memo=0x7f090088;
         public static final int action_bar=0x7f090033;
         public static final int action_bar_activity_content=0x7f090003;
         public static final int action_bar_container=0x7f090032;
@@ -1664,13 +1664,14 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f090030;
         public static final int action_mode_bar_stub=0x7f09002f;
         public static final int action_mode_close_button=0x7f090022;
-        public static final int action_settings=0x7f090083;
+        public static final int action_settings=0x7f09008c;
         public static final int activity_chooser_view_content=0x7f090023;
+        public static final int addTask=0x7f090083;
         public static final int addclass_listview=0x7f090051;
         public static final int always=0x7f090014;
         public static final int beginning=0x7f09001b;
         public static final int bottom=0x7f09001e;
-        public static final int btn=0x7f090082;
+        public static final int btn=0x7f09008b;
         public static final int button1=0x7f09007b;
         public static final int button2=0x7f09007c;
         public static final int button3=0x7f09007d;
@@ -1712,9 +1713,14 @@ containing a value of this type.
         public static final int default_activity_button=0x7f090026;
         public static final int delete=0x7f09004c;
         public static final int deleteBtn=0x7f09006f;
+        public static final int deleteTask=0x7f090087;
         public static final int dialog=0x7f090019;
         public static final int disableHome=0x7f09000d;
         public static final int dropdown=0x7f09001a;
+        public static final int editContents=0x7f090081;
+        public static final int editDelete=0x7f090086;
+        public static final int editSubject=0x7f09007f;
+        public static final int editTitle=0x7f090080;
         public static final int edit_query=0x7f090035;
         public static final int end=0x7f09001c;
         public static final int expand_activities_button=0x7f090024;
@@ -1726,7 +1732,7 @@ containing a value of this type.
         public static final int ifRoom=0x7f090016;
         public static final int image=0x7f090025;
         public static final int info=0x7f090046;
-        public static final int layout=0x7f090080;
+        public static final int layout=0x7f090089;
         public static final int listMode=0x7f09000a;
         public static final int list_item=0x7f090027;
         public static final int mainColor=0x7f09005a;
@@ -1750,7 +1756,7 @@ containing a value of this type.
         public static final int radio=0x7f09002d;
         public static final int save=0x7f09004a;
         public static final int saveBtn=0x7f09006d;
-        public static final int schedule=0x7f090084;
+        public static final int schedule=0x7f09008d;
         public static final int search_badge=0x7f090037;
         public static final int search_bar=0x7f090036;
         public static final int search_button=0x7f090038;
@@ -1768,15 +1774,18 @@ containing a value of this type.
         public static final int split_action_bar=0x7f090004;
         public static final int starttime=0x7f090048;
         public static final int subName=0x7f090058;
+        public static final int subject=0x7f090082;
         public static final int subject_listview=0x7f090050;
         public static final int submit_area=0x7f09003e;
         public static final int switch1=0x7f090053;
         public static final int tabMode=0x7f09000c;
+        public static final int taskList=0x7f090085;
+        public static final int textView01=0x7f090084;
         public static final int time1=0x7f090069;
         public static final int time2=0x7f09006a;
         public static final int timeplus1=0x7f090079;
         public static final int timeplus2=0x7f09007a;
-        public static final int timetable=0x7f090081;
+        public static final int timetable=0x7f09008a;
         public static final int title=0x7f090029;
         public static final int top=0x7f09001f;
         public static final int up=0x7f090001;
@@ -1843,8 +1852,11 @@ containing a value of this type.
         public static final int lp_plus=0x7f03001e;
         public static final int main_start=0x7f03001f;
         public static final int support_simple_spinner_dropdown_item=0x7f030020;
-        public static final int tt_infofragment=0x7f030021;
-        public static final int tt_timetable=0x7f030022;
+        public static final int te_addtask=0x7f030021;
+        public static final int te_task_item=0x7f030022;
+        public static final int te_taskstart=0x7f030023;
+        public static final int tt_infofragment=0x7f030024;
+        public static final int tt_timetable=0x7f030025;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;

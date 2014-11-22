@@ -33,6 +33,10 @@
         <activity android:name="com.hanproject.timetable.DI_SelectChangeActivity" >
         </activity>
         <activity android:name=".timetable.DI_CP_PlusClassFragment"></activity>
+        <activity android:name="com.hanproject.taskexam.TaskStartActivity" >
+        </activity>
+        <activity android:name="com.hanproject.taskexam.addTaskActivity" >
+        </activity>
     </application>
 
 </manifest>

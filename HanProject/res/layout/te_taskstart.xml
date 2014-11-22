@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <Button 
+        android:id="@+id/addTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="과제 추가하기"
+        android:textSize="25dp"
+        android:layout_gravity="center"/>
+    
+    <TextView
+        android:id="@+id/textView01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:textSize="25dp"
+        android:layout_gravity="center"/>
+    <ListView 
+        android:id="@+id/taskList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></ListView>
+    
+    <EditText 
+        android:id="@+id/editDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"/>
+    
+     <Button 
+        android:id="@+id/deleteTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="삭제!"
+        android:textSize="25dp"
+        android:layout_gravity="center"/>
+    
+
+</LinearLayout>

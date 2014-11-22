@@ -13,6 +13,7 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 
 	Button goTimeTable;
+	Button goTaskExam;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,6 +38,16 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			    Intent intent = new Intent(getApplicationContext(),com.hanproject.timetable.TT_TimeTableActivity.class);
+			    startActivity(intent);
+			}
+		});
+		goTaskExam = (Button)findViewById(R.id.button4);
+		goTaskExam.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			    Intent intent = new Intent(getApplicationContext(),com.hanproject.taskexam.TaskStartActivity.class);
 			    startActivity(intent);
 			}
 		});
