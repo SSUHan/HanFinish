@@ -12,6 +12,8 @@
         android:layout_alignParentTop="true"
         android:background="#ccccff"
         android:numColumns="6"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
         android:stretchMode="columnWidth">
           </GridView>
     
@@ -19,6 +21,6 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="보기"/>
+        android:background="@drawable/lock"/>
 
 </RelativeLayout>

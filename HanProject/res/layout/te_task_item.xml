@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         
-        <TextVew 
-            android:id="@+id/subject"
+        <TextView 
+            android:id="@+id/tasksubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"/>
-        <TextVew 
-            android:id="@+id/title"
+        <TextView 
+            android:id="@+id/tasktitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"/>

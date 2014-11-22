@@ -3,41 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <Button 
-        android:id="@+id/addTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="과제 추가하기"
-        android:textSize="25dp"
-        android:layout_gravity="center"/>
-    
-    <TextView
-        android:id="@+id/textView01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        
-        android:textSize="25dp"
-        android:layout_gravity="center"/>
-    <ListView 
-        android:id="@+id/taskList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></ListView>
-    
-    <EditText 
-        android:id="@+id/editDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"/>
-    
-     <Button 
-        android:id="@+id/deleteTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="삭제!"
-        android:textSize="25dp"
-        android:layout_gravity="center"/>
-    
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/addTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="과제 추가하기"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/textView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25dp" />
+
+            <ListView
+                android:id="@+id/taskList"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" >
+            </ListView>
+
+            <EditText
+                android:id="@+id/editDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/deleteTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="삭제!"
+                android:textSize="25dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

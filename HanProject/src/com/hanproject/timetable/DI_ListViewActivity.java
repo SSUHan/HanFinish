@@ -7,15 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -28,26 +23,24 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hanproject.R;
 
 public class DI_ListViewActivity extends ActionBarActivity {
 
 	Button addclass;
-	
+
 	List<String> names = new ArrayList<String>();
-	List<String> starttimes=new ArrayList<String>();
-	List<String> classrooms=new ArrayList<String>();
+	List<String> starttimes = new ArrayList<String>();
+	List<String> classrooms = new ArrayList<String>();
 	List<Integer> icons = new ArrayList<Integer>();
-	
+
 	List<String> infos = new ArrayList<String>();
 	List<String> times = new ArrayList<String>();
-	
+
 	String date;
 
 	static SQLiteDatabase database;
-	
 
 	String DatabaseName = "timeplus.db";
 	String TableName = "base";
@@ -57,43 +50,50 @@ public class DI_ListViewActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.di_listview);
-		
-		try {
-			getActionBar().setTitle("LIST");
-			getActionBar().setDisplayShowHomeEnabled(false);
-		} catch (Exception e) {
-
-		}
-		createDataBase();
-		
-
-		Resources res = getResources();
-
-
-		ListView list = (ListView) findViewById(R.id.subject_listview);
-		ListAdapter adapter = new ListAdapter();
-		list.setAdapter(adapter);
-		
-		ListView list2 = (ListView) findViewById(R.id.addclass_listview);
-		ListAdapter_Add adapter2= new ListAdapter_Add();
-		list2.setAdapter(adapter2);
-
 		columnIndex = CM_CalendarMonthViewActivity.columnIndex;
-		
-		date=CM_CalendarMonthViewActivity.selectedYear+".";
-		date+=(CM_CalendarMonthViewActivity.selectedMonth+1)+".";
-		date+=CM_CalendarMonthViewActivity.day;
+
+		date = CM_CalendarMonthViewActivity.selectedYear + ".";
+		date += (CM_CalendarMonthViewActivity.selectedMonth + 1) + ".";
+		date += CM_CalendarMonthViewActivity.day;
 		try {
 			date = addDate(date, -columnIndex);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Log.d("date2",date);
-        
-		addclass=(Button)findViewById(R.id.plusclass);
-		addclass.setOnClickListener(new OnClickListener(){
+		Log.d("date2", date);
+		
+		init();
+		
+		/*setContentView(R.layout.di_listview);
+
+		createDataBase();
+
+		Resources res = getResources();
+
+		ListView list = (ListView) findViewById(R.id.subject_listview);
+		ListAdapter adapter = new ListAdapter();
+		list.setAdapter(adapter);
+
+		ListView list2 = (ListView) findViewById(R.id.addclass_listview);
+		ListAdapter_Add adapter2 = new ListAdapter_Add();
+		list2.setAdapter(adapter2);
+
+		columnIndex = CM_CalendarMonthViewActivity.columnIndex;
+
+		date = CM_CalendarMonthViewActivity.selectedYear + ".";
+		date += (CM_CalendarMonthViewActivity.selectedMonth + 1) + ".";
+		date += CM_CalendarMonthViewActivity.day;
+		try {
+			date = addDate(date, -columnIndex);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Log.d("date2", date);
+
+		addclass = (Button) findViewById(R.id.plusclass);
+		addclass.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -102,10 +102,10 @@ public class DI_ListViewActivity extends ActionBarActivity {
 						DI_CP_PlusClassFragment.class);
 				intent.putExtra("mode", 0);
 				intent.putExtra("day", columnIndex);
-				intent.putExtra("date",date );
+				intent.putExtra("date", date);
 				startActivity(intent);
 			}
-			
+
 		});
 		String dayOfWeek;
 		if (columnIndex == 0) {
@@ -145,22 +145,23 @@ public class DI_ListViewActivity extends ActionBarActivity {
 				}
 			}
 		});
-		
+
 		list2.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				try {
-					DI_CP_Data data=querybyTime(columnIndex,times.get(position));
+					DI_CP_Data data = querybyTime(columnIndex,
+							times.get(position));
 					Intent intent = new Intent(getApplicationContext(),
 							DI_CP_PlusClassFragment.class);
 					intent.putExtra("mode", 1);
-					intent.putExtra("info",data.info);
-					intent.putExtra("classroom",data.classroom);
-					intent.putExtra("starttime",data.starttime);
-					intent.putExtra("finishtime",data.finishtime);
-					intent.putExtra("day",data.day);
-					intent.putExtra("date",data.date);
+					intent.putExtra("info", data.info);
+					intent.putExtra("classroom", data.classroom);
+					intent.putExtra("starttime", data.starttime);
+					intent.putExtra("finishtime", data.finishtime);
+					intent.putExtra("day", data.day);
+					intent.putExtra("date", data.date);
 					startActivity(intent);
 				} catch (Exception ex) {
 					Log.d("TAG", ex.getMessage());
@@ -168,43 +169,153 @@ public class DI_ListViewActivity extends ActionBarActivity {
 			}
 		});
 
+		queryDatabyWeek(columnIndex);
+		queryAddDatabyWeek(columnIndex);*/
+	}
+	public void onResume()
+	{
+		super.onResume();
 		
+		init();
+	}
+
+	void init() {
+		setContentView(R.layout.di_listview);
+
+		createDataBase();
+
+		Resources res = getResources();
+
+		ListView list = (ListView) findViewById(R.id.subject_listview);
+		ListAdapter adapter = new ListAdapter();
+		list.setAdapter(adapter);
+
+		ListView list2 = (ListView) findViewById(R.id.addclass_listview);
+		ListAdapter_Add adapter2 = new ListAdapter_Add();
+		list2.setAdapter(adapter2);
+
+
+		addclass = (Button) findViewById(R.id.plusclass);
+		addclass.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getApplicationContext(),
+						DI_CP_PlusClassFragment.class);
+				intent.putExtra("mode", 0);
+				intent.putExtra("day", columnIndex);
+				intent.putExtra("date", date);
+				startActivity(intent);
+			}
+
+		});
 		
+		String dayOfWeek;
+		if (columnIndex == 0) {
+			dayOfWeek = "일";
+		} else if (columnIndex == 1) {
+			dayOfWeek = "월";
+		} else if (columnIndex == 2) {
+			dayOfWeek = "화";
+		} else if (columnIndex == 3) {
+			dayOfWeek = "수";
+		} else if (columnIndex == 4) {
+			dayOfWeek = "목";
+		} else if (columnIndex == 5) {
+			dayOfWeek = "금";
+		} else {
+			dayOfWeek = "토";
+		}
+
+		TextView dateText = (TextView) findViewById(R.id.dateText);
+		dateText.setText(CM_CalendarMonthViewActivity.day + "일 " + dayOfWeek
+				+ "요일");
+
+		list.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				try {
+					Intent intent = new Intent(getApplicationContext(),
+							DI_SelectChangeActivity.class);
+					intent.putExtra("date", date);
+					intent.putExtra("day", columnIndex);
+					intent.putExtra("starttime", starttimes.get(position));
+					intent.putExtra("classroom", classrooms.get(position));
+					startActivityForResult(intent, 1002);
+				} catch (Exception ex) {
+					Log.d("TAG", ex.getMessage());
+				}
+			}
+		});
+
+		list2.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				try {
+					DI_CP_Data data = querybyTime(columnIndex,
+							times.get(position));
+					Intent intent = new Intent(getApplicationContext(),
+							DI_CP_PlusClassFragment.class);
+					intent.putExtra("mode", 1);
+					intent.putExtra("info", data.info);
+					intent.putExtra("classroom", data.classroom);
+					intent.putExtra("starttime", data.starttime);
+					intent.putExtra("finishtime", data.finishtime);
+					intent.putExtra("day", data.day);
+					intent.putExtra("date", data.date);
+					startActivity(intent);
+				} catch (Exception ex) {
+					Log.d("TAG", ex.getMessage());
+				}
+			}
+		});
+
 		queryDatabyWeek(columnIndex);
 		queryAddDatabyWeek(columnIndex);
 	}
-	 void createDataBase()
-	{
-	    	database=openOrCreateDatabase(DatabaseName,MODE_WORLD_WRITEABLE, null);
-    }
-	void createTable()
-	{
-	    	database.execSQL("CREATE TABLE IF NOT EXISTS "+TableName+ "(subject text,professor text,classroom text,"
-	    			+ "starttime text,finishtime text,day integer,color integer,memo text)");
-	}
-	void crateAddTable()
-	{
-			database.execSQL("CREATE TABLE IF NOT EXISTS "+TableName2+ "(info text,starttime text,finishtime text,"
-    			+ "classroom text,day integer,date text)");
+
+	void createDataBase() {
+		database = openOrCreateDatabase(DatabaseName, MODE_WORLD_WRITEABLE,
+				null);
 	}
 
-	
+	void createTable() {
+		database.execSQL("CREATE TABLE IF NOT EXISTS "
+				+ TableName
+				+ "(subject text,professor text,classroom text,"
+				+ "starttime text,finishtime text,day integer,color integer,memo text)");
+	}
+
+	void crateAddTable() {
+		database.execSQL("CREATE TABLE IF NOT EXISTS " + TableName2
+				+ "(info text,starttime text,finishtime text,"
+				+ "classroom text,day integer,date text)");
+	}
 
 	public void queryDatabyWeek(int dayOfWeek) {
 
+		names = new ArrayList<String>();
+		starttimes = new ArrayList<String>();
+		classrooms = new ArrayList<String>();
+		icons = new ArrayList<Integer>();
+
+		
 		try {
-			String sql = "select color, subject, professor , starttime, classroom from " + TableName
-					+ " where day = " + dayOfWeek;
+			String sql = "select color, subject, professor , starttime, classroom from "
+					+ TableName + " where day = " + dayOfWeek;
 
 			Cursor cursor = database.rawQuery(sql, null);
 			int count = cursor.getCount();
 
 			for (int i = 0; i < count; i++) {
 				cursor.moveToNext();
-				int color=cursor.getInt(0);
-				String name = cursor.getString(1)+" - "+cursor.getString(2);
-				String starttime=cursor.getString(3);
-				String classroom=cursor.getString(4);
+				int color = cursor.getInt(0);
+				String name = cursor.getString(1) + " - " + cursor.getString(2);
+				String starttime = cursor.getString(3);
+				String classroom = cursor.getString(4);
 				names.add(name);
 				icons.add(color);
 				classrooms.add(classroom);
@@ -214,62 +325,68 @@ public class DI_ListViewActivity extends ActionBarActivity {
 		} catch (Exception ex) {
 		}
 	}
+
 	public void queryAddDatabyWeek(int day) {
 
-		try {
-			String sql = "select info, starttime, finishtime from " + TableName2
-					+ " where day = " + day+" and date='"+date+"'";
 
-			Log.d("sql",sql);
-			
+		infos = new ArrayList<String>();
+		times = new ArrayList<String>();
+		
+		try {
+			String sql = "select info, starttime, finishtime from "
+					+ TableName2 + " where day = " + day + " and date='" + date
+					+ "'";
+
+			Log.d("sql", sql);
+
 			Cursor cursor = database.rawQuery(sql, null);
 			int count = cursor.getCount();
-			
+
 			String info;
 			String time;
 
 			for (int i = 0; i < count; i++) {
 				cursor.moveToNext();
-				info=cursor.getString(0);
-				time = cursor.getString(1)+" ~ "+cursor.getString(2);
-				infos.add(info+" - "+time);
+				info = cursor.getString(0);
+				time = cursor.getString(1) + " ~ " + cursor.getString(2);
+				infos.add(info + " - " + time);
 				times.add(cursor.getString(1));
 			}
 
 		} catch (Exception ex) {
 		}
 	}
-	public DI_CP_Data querybyTime(int day,String time) {
 
-		DI_CP_Data data=null;
+	public DI_CP_Data querybyTime(int day, String time) {
+
+		DI_CP_Data data = null;
 		try {
-			String sql = "select info, finishtime, classroom from " + TableName2
-					+ " where starttime='"+time+"' and day = " + day+" and date='"+date+"'";
+			String sql = "select info, finishtime, classroom from "
+					+ TableName2 + " where starttime='" + time + "' and day = "
+					+ day + " and date='" + date + "'";
 
-			Log.d("sql",sql);
-			
+			Log.d("sql", sql);
+
 			Cursor cursor = database.rawQuery(sql, null);
-			
+
 			int count = cursor.getCount();
-			
-			String info="";
-			String finishtime="";
-			String classroom="";
+
+			String info = "";
+			String finishtime = "";
+			String classroom = "";
 
 			for (int i = 0; i < count; i++) {
 				cursor.moveToNext();
-				info=cursor.getString(0);
+				info = cursor.getString(0);
 				finishtime = cursor.getString(1);
 				classroom = cursor.getString(2);
 			}
-			data=new DI_CP_Data(info,classroom,time,finishtime,day,date);
+			data = new DI_CP_Data(info, classroom, time, finishtime, day, date);
 
 		} catch (Exception ex) {
 		}
 		return data;
 	}
-	
-
 
 	class ListAdapter extends BaseAdapter {
 
@@ -298,6 +415,7 @@ public class DI_ListViewActivity extends ActionBarActivity {
 			return layout;
 		}
 	}
+
 	class ListAdapter_Add extends BaseAdapter {
 
 		@Override
@@ -324,20 +442,18 @@ public class DI_ListViewActivity extends ActionBarActivity {
 			return layout;
 		}
 	}
-	public String addDate(String da, int dd) throws ParseException 
-	{
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-        Date date = format.parse(da);
+	public String addDate(String da, int dd) throws ParseException {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+		Date date = format.parse(da);
 
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
 
-        calendar.add(Calendar.DATE, dd);
+		calendar.add(Calendar.DATE, dd);
 
+		return format.format(calendar.getTime());
 
-        return format.format(calendar.getTime());
-
-    }
+	}
 }
