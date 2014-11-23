@@ -37,7 +37,7 @@ public class TT_TimeTableActivity extends Activity {
 	String tableName1 = "base_change";
 	String tableName2 = "base_minus";
 	String tableName3 = "base_add";
-	String date="";
+	String date = "";
 
 	List<TT_LP_Data> datas = new ArrayList<TT_LP_Data>();
 
@@ -58,27 +58,23 @@ public class TT_TimeTableActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		Date oridate=new Date();
-		date+=(1900+oridate.getYear())+".";
-		date+=(oridate.getMonth()+1)+".";
-		date+=oridate.getDate();
+
+		Date oridate = new Date();
+		date += (1900 + oridate.getYear()) + ".";
+		date += (oridate.getMonth() + 1) + ".";
+		date += oridate.getDate();
 		try {
 			date = addDate(date, -(oridate.getDay()));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		init();
-		
-		
 
 	}
-	void init()
-	{	
+
+	void init() {
 		setContentView(R.layout.tt_timetable);
 
 		btn = (Button) findViewById(R.id.btn);
@@ -87,11 +83,11 @@ public class TT_TimeTableActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (mode==false) {
+				if (mode == false) {
 					btn.setBackgroundResource(R.drawable.unlock);
 					mode = true;
 				} else {
-					btn.setBackgroundResource(R.drawable.lock);;
+					btn.setBackgroundResource(R.drawable.lock);
 					mode = false;
 				}
 			}
@@ -100,13 +96,11 @@ public class TT_TimeTableActivity extends Activity {
 
 		TT_TimeTableAdapter adapter = new TT_TimeTableAdapter(this);
 		timeTable = (GridView) findViewById(R.id.timetable);
-		
-		
+
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		screenWidth = metrics.widthPixels;
 		screenHeight = metrics.heightPixels;
-
 
 		adapter.addItem(new TT_TableItem("", 0, 0));
 		adapter.addItem(new TT_TableItem("월", 0, 0));
@@ -129,29 +123,24 @@ public class TT_TimeTableActivity extends Activity {
 
 	protected void onResume() {
 		super.onResume();
-		
+
 		init();
-		
-		if(setting==true)
-		{
+
+		if (setting == true) {
 			btn = (Button) findViewById(R.id.btn);
 			if (mode == true)
 				btn.setBackgroundResource(R.drawable.unlock);
 			else
 				btn.setBackgroundResource(R.drawable.lock);
-			
-			LayoutParams params= new LayoutParams(viewWidth,
-					(int)viewHeight);
+
+			LayoutParams params = new LayoutParams(viewWidth, (int) viewHeight);
 			btn.setLayoutParams(params);
-			
+
 			createDataBase();
 			createTable();
 			queryTotalData();
 		}
-		
-		
 
-		
 	}
 
 	public void onWindowFocusChanged(boolean hasFocus) {
@@ -161,11 +150,10 @@ public class TT_TimeTableActivity extends Activity {
 			viewWidth = timeTable.getWidth() / 6;
 			viewHeight = timeTable.getHeight() / 12;
 			setting = true;
-			
-			LayoutParams params= new LayoutParams(viewWidth,
-					(int)viewHeight);
+
+			LayoutParams params = new LayoutParams(viewWidth, (int) viewHeight);
 			btn.setLayoutParams(params);
-			
+
 			createDataBase();
 			createTable();
 			queryTotalData();
@@ -193,8 +181,9 @@ public class TT_TimeTableActivity extends Activity {
 				+ "(starttime text" + ",day integer,date text)");
 		db.execSQL("CREATE TABLE IF NOT EXISTS " + tableName1
 				+ "(starttime text" + ",day integer,date text,classroom text)");
-		db.execSQL("CREATE TABLE IF NOT EXISTS "+tableName3+ "(info text,starttime text,finishtime text,"
-	    			+ "classroom text,day integer,date text)");
+		db.execSQL("CREATE TABLE IF NOT EXISTS " + tableName3
+				+ "(info text,starttime text,finishtime text,"
+				+ "classroom text,day integer,date text)");
 	}
 
 	void queryTotalData() {
@@ -206,7 +195,7 @@ public class TT_TimeTableActivity extends Activity {
 		String sql = "Select day, subject, starttime, finishtime, color, professor,classroom from "
 				+ tableName;
 		Cursor cursor = db.rawQuery(sql, null);
-		
+
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
 				cursor.moveToNext();
@@ -223,9 +212,9 @@ public class TT_TimeTableActivity extends Activity {
 				datas.add(data);
 			}
 		}
-		
-		sql = "Select classroom,day,starttime from "+ tableName1;
-		sql+=" where date='"+date+"'";
+
+		sql = "Select classroom,day,starttime from " + tableName1;
+		sql += " where date='" + date + "'";
 		cursor = db.rawQuery(sql, null);
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -234,21 +223,21 @@ public class TT_TimeTableActivity extends Activity {
 				String classroom = cursor.getString(0);
 				String starttime = cursor.getString(2);
 
-				data1 = new DI_CC_Data(classroom, starttime,day,date);
-				
-				for(int j=0;j<datas.size();j++)
-					if(datas.get(j).day==data1.day
-					&&datas.get(j).startTime.equals(data1.starttime))
-					{
-						datas.get(j).changeclassroom=data1.classroom;
-						datas.get(j).subjectName="*"+datas.get(j).subjectName;
-						datas.get(j).mode2=2;
+				data1 = new DI_CC_Data(classroom, starttime, day, date);
+
+				for (int j = 0; j < datas.size(); j++)
+					if (datas.get(j).day == data1.day
+							&& datas.get(j).startTime.equals(data1.starttime)) {
+						datas.get(j).changeclassroom = data1.classroom;
+						datas.get(j).subjectName = "*"
+								+ datas.get(j).subjectName;
+						datas.get(j).mode2 = 2;
 					}
 			}
 		}
-		
-		sql = "Select day,starttime from "+ tableName2;
-		sql+=" where date='"+date+"'";
+
+		sql = "Select day,starttime from " + tableName2;
+		sql += " where date='" + date + "'";
 		cursor = db.rawQuery(sql, null);
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -256,20 +245,20 @@ public class TT_TimeTableActivity extends Activity {
 				int day = cursor.getInt(0);
 				String starttime = cursor.getString(1);
 
-				data2 = new DI_CM_Data( starttime,day,date);
-				
-				for(int j=0;j<datas.size();j++)
-					if(datas.get(j).day==data2.day
-					&&datas.get(j).startTime.equals(data2.starttime))
-					{
-						datas.get(j).color+=100;
-						datas.get(j).mode2=1;
+				data2 = new DI_CM_Data(starttime, day, date);
+
+				for (int j = 0; j < datas.size(); j++)
+					if (datas.get(j).day == data2.day
+							&& datas.get(j).startTime.equals(data2.starttime)) {
+						datas.get(j).color += 100;
+						datas.get(j).mode2 = 1;
 					}
 			}
 		}
-		
-		sql = "Select info,classroom,starttime,finishtime,day from "+ tableName3;
-		sql+=" where date='"+date+"'";
+
+		sql = "Select info,classroom,starttime,finishtime,day from "
+				+ tableName3;
+		sql += " where date='" + date + "'";
 		cursor = db.rawQuery(sql, null);
 		if (cursor != null) {
 			for (int i = 0; i < cursor.getCount(); i++) {
@@ -280,7 +269,8 @@ public class TT_TimeTableActivity extends Activity {
 				String finishtime = cursor.getString(3);
 				int day = cursor.getInt(4);
 
-				data3 = new DI_CP_Data(subject,classroom,starttime,finishtime,day,date);
+				data3 = new DI_CP_Data(subject, classroom, starttime,
+						finishtime, day, date);
 				StringTokenizer st = new StringTokenizer(data3.starttime, ":");
 				int startHours = Integer.parseInt(st.nextToken());
 				int startMinute = Integer.parseInt(st.nextToken());
@@ -289,16 +279,16 @@ public class TT_TimeTableActivity extends Activity {
 				int finishMinute = Integer.parseInt(st.nextToken());
 				int duration = caldur(startHours, startMinute, finishHours,
 						finishMinute);
-				
-				setSubjectName(data3.day - 1, data3.info
-						, startHours, startMinute, duration, 0,3,"",data3);
-				
+
+				setSubjectName(data3.day - 1, data3.info, startHours,
+						startMinute, duration, 0, 3, "", data3);
+
 			}
 		}
-		
-		for (int i = 0;i< datas.size(); i++) 
-		{
-			StringTokenizer st = new StringTokenizer(datas.get(i).startTime, ":");
+
+		for (int i = 0; i < datas.size(); i++) {
+			StringTokenizer st = new StringTokenizer(datas.get(i).startTime,
+					":");
 			int startHours = Integer.parseInt(st.nextToken());
 			int startMinute = Integer.parseInt(st.nextToken());
 			st = new StringTokenizer(datas.get(i).finishTime, ":");
@@ -307,11 +297,11 @@ public class TT_TimeTableActivity extends Activity {
 			int duration = caldur(startHours, startMinute, finishHours,
 					finishMinute);
 
-			setSubjectName(datas.get(i).day - 1, datas.get(i).subjectName
-					, startHours, startMinute, duration, datas.get(i).color,datas.get(i).mode2
-					,datas.get(i).changeclassroom,null);
+			setSubjectName(datas.get(i).day - 1, datas.get(i).subjectName,
+					startHours, startMinute, duration, datas.get(i).color,
+					datas.get(i).mode2, datas.get(i).changeclassroom, null);
 		}
-		datas= new ArrayList<TT_LP_Data>();
+		datas = new ArrayList<TT_LP_Data>();
 	}
 
 	TT_LP_Data queryEditData(String name, int startHours, int startMinute,
@@ -369,10 +359,12 @@ public class TT_TimeTableActivity extends Activity {
 					* (finishHours - startHours - 1);
 		return duration;
 	}
-//mode2->정상 0 휴강 1 강의실변경 2 보강 3
+
+	// mode2->정상 0 휴강 1 강의실변경 2 보강 3
 	public void setSubjectName(final int dayOfWeek, String SubjectName,
 			final int startHours, final int startMinute, float durationMinute,
-			int color,final int mode2,final String changeclassroom,final DI_CP_Data cpdata) {
+			int color, final int mode2, final String changeclassroom,
+			final DI_CP_Data cpdata) {
 
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
 
@@ -399,26 +391,27 @@ public class TT_TimeTableActivity extends Activity {
 					startActivity(intent);
 				} else {
 					TT_InfoFragment dFragment;
-					if(mode2!=3){
+					if (mode2 != 3) {
 						String memo = queryMemoData("base", startHours,
 								startMinute, dayOfWeek);
-						if(mode2==2)
-							 dFragment = new TT_InfoFragment(data, memo,
-									"base",mode2,changeclassroom);
+						if (mode2 == 2)
+							dFragment = new TT_InfoFragment(data, memo, "base",
+									mode2, changeclassroom);
 						else
-							 dFragment = new TT_InfoFragment(data, memo,
-									"base",mode2);
-						dFragment.show(fm, "Dialog Fragment");}
-					else{
-						 dFragment = new TT_InfoFragment(cpdata);
-						dFragment.show(fm, "Dialog Fragment");}
+							dFragment = new TT_InfoFragment(data, memo, "base",
+									mode2);
+						dFragment.show(fm, "Dialog Fragment");
+					} else {
+						dFragment = new TT_InfoFragment(cpdata);
+						dFragment.show(fm, "Dialog Fragment");
 					}
 				}
-			});
+			}
+		});
 
 		// 색 설정
 		if (color % 100 == 0)
-			subjectNameView.setBackgroundColor(Color.rgb(85,119, 85));
+			subjectNameView.setBackgroundColor(Color.rgb(85, 119, 85));
 		else if (color % 100 == 1)
 			subjectNameView.setBackgroundColor(Color.rgb(255, 0, 0));
 		else if (color % 100 == 2)
@@ -432,9 +425,8 @@ public class TT_TimeTableActivity extends Activity {
 		else if (color % 100 == 6)
 			subjectNameView.setBackgroundColor(Color.rgb(0, 255, 255));
 
-		if (color > 100)
-		{
-			Drawable d=subjectNameView.getBackground();
+		if (color > 100) {
+			Drawable d = subjectNameView.getBackground();
 			d.setAlpha(50);
 		}
 
@@ -495,21 +487,19 @@ public class TT_TimeTableActivity extends Activity {
 
 		return true;
 	}
-	public String addDate(String da, int dd) throws ParseException 
-	{
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-        Date date = format.parse(da);
+	public String addDate(String da, int dd) throws ParseException {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+		Date date = format.parse(da);
 
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
 
-        calendar.add(Calendar.DATE, dd);
+		calendar.add(Calendar.DATE, dd);
 
+		return format.format(calendar.getTime());
 
-        return format.format(calendar.getTime());
-
-    }
+	}
 
 }

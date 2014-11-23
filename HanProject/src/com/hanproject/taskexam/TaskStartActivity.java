@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hanproject.R;
 
@@ -69,7 +71,6 @@ public class TaskStartActivity extends ActionBarActivity {
 				showTask();
 			}
 		});
-	
 
 		String data = "";
 		Cursor c = handler.select();
@@ -86,6 +87,33 @@ public class TaskStartActivity extends ActionBarActivity {
 		}
 		textView01.setText(data);
 		task_list.setAdapter(adapter);
+
+		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+				task_list,
+				new SwipeDismissListViewTouchListener.DismissCallbacks() {
+
+					public void onDismiss(ListView listView,
+							int[] reverseSortedPositions) {
+						for (int position : reverseSortedPositions) {
+							Log.d("Æ÷Áö¼Ç", "" + position);
+							taskItem ti = (taskItem) adapter.getItem(position);
+							String title = ti.getTitle();
+							handler.delete(title);
+							showTask();
+						}
+					}
+					
+					@Override
+					public boolean canDismiss(int position) {
+						Toast.makeText(getApplicationContext(), "Here?", Toast.LENGTH_LONG).show();
+						return true;
+					}
+				});
+		
+		
+		task_list.setOnTouchListener(touchListener);
+		task_list.setOnScrollListener(touchListener.makeScrollListener());
+
 	}
 
 	private void init() {

@@ -19,12 +19,10 @@ public class taskAdapter extends BaseAdapter {
 	// 문자열을 보관할 ArrayList
 	private ArrayList<taskItem> m_list;
 
-	// 생성자
 	public taskAdapter() {
-		// TODO Auto-generated constructor stub
 		m_list = new ArrayList<taskItem>();
 	}
-
+	
 	// 현재 아이템수를 리턴
 	@Override
 	public int getCount() {
@@ -67,24 +65,6 @@ public class taskAdapter extends BaseAdapter {
 			TextView title = (TextView)convertView.findViewById(R.id.tasktitle);
 			title.setText(m_list.get(pos).getTitle());
 
-			convertView.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Toast.makeText(context, "리스트 클릭: " +String.valueOf( m_list.get(pos)),
-							Toast.LENGTH_SHORT).show();
-				}
-			});
-
-			convertView.setOnLongClickListener(new OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					// TODO Auto-generated method stub
-					Toast.makeText(context, "리스트 길게클릭: " +String.valueOf( m_list.get(pos)),
-							Toast.LENGTH_SHORT).show();
-					return true;
-				}
-			});
 		}
 		return convertView;
 	}

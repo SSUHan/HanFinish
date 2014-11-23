@@ -16,7 +16,6 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
 		super(context, dbname, factory, version);
 		// TODO Auto-generated constructor stub
 		tableName = tablename;
-
 	}
 
 	// 테이블 생성
